@@ -1,0 +1,127 @@
+.footer {
+    font-family: 'Scope One', serif;
+    display: flex;
+    flex-direction: column;
+
+    .footer-banner {
+        background-color: #FFE600;
+        background-image: url(../../../assets/footer-banner.png);
+        width: 100%;
+        height: 16vw;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        margin-bottom: -2px;
+    }
+
+    .footer-container {
+        background-color: black;
+        padding: 24px 6vw 46px 5vw;
+        height: fit-content;
+        color: #FFE600;
+
+        .sections-container {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+
+            .contact {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+
+                .contact-title {
+                    font-size: 28px;
+                    margin-bottom: 12px;
+                    text-decoration: underline;
+                }
+                
+                .phone-number {
+                    font-size: 28px;
+
+                    a {
+                        color: #FFE600;
+                        text-decoration: none;
+                    }
+                }
+                
+                .contact-email {
+                    font-size: 28px;
+                }
+            }
+
+            .information {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 0 32px;
+                
+                .clickable-footer-text {
+                    cursor: pointer;
+                    font-size: 28px;
+                }
+            }
+
+            .newsletter {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .contact-input {
+                    background-color: #FFE600;
+                    color: black;
+                    padding: 8px 12px;
+                    font-size: 20px;
+                    border-radius: 12px;
+                    border: unset;
+                    margin-bottom: 8px;
+                }
+
+                #name-label, #email-label {
+                    display: none;
+                }
+
+                .subscribe-text {
+                    font-size: 28px;
+                    cursor: pointer;
+                    margin-top: 12px;
+                }
+            }
+            
+        }
+
+        .social-container {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding-top: 48px;
+
+            .footer-logo {
+                width: 177px;
+            }
+
+            .social-images {
+                padding-right: 3vw;
+
+                .social-image-link {
+                    color: transparent;
+                    padding-left: 8px;
+
+                    .social-image {
+                        width: 47px;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+::placeholder { 
+    color: black;
+    opacity: 1;
+}

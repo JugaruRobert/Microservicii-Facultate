@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 
-import { AccessToken, ErrorResponse, LoginInfo } from '../models/shared.models';
+import { AccessToken, Book, ErrorResponse, LoginInfo } from '../models/shared.models';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -24,5 +24,29 @@ export class ApiService {
 
   register(loginInfo: LoginInfo): Observable<ErrorResponse> {
     return this.http.post<ErrorResponse>(this.baseUrl + "register", loginInfo);
+  }
+
+  getAllBooks(userEmail: string): Observable<Book[]> {
+    return this.http.get<Book[]>(this.baseUrl + 'books/' + userEmail);
+  }
+
+  addBook(book: Book): Observable<Book> {
+    return this.http.post<Book>(this.baseUrl + 'books', book);
+  }
+
+  updateBook(book: Book): Observable<Book> {
+    return this.http.put<Book>(this.baseUrl + 'books', book);
+  }
+
+  googleLogin() {
+    location.href = this.baseUrl + 'google';
+  }
+
+  getBookDetails(bookID: string): Observable<Book> {
+    return this.http.get<Book>(this.baseUrl + 'books/bookID/' + bookID);
+  }
+
+  deleteBook(bookID: string) {
+    return this.http.delete(this.baseUrl + 'books/' + bookID);
   }
 }

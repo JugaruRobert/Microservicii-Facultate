@@ -6,8 +6,7 @@ import { ApiService } from 'src/app/shared/services/api.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 
 import { ToastrService } from 'ngx-toastr';
-import { LoginInfo, ErrorResponse, AccessToken } from 'src/app/shared/models/shared.models';
-import { environment } from 'src/environments/environment';
+import { LoginInfo, AccessToken } from 'src/app/shared/models/shared.models';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +27,12 @@ export class LoginComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    if(this.loginService.googleError)
+    {
+      this.errorToast("Google Authentication Unsuccessful!");
+      this.loginService.googleError = false;
+    }
+
     this.buildLoginForm();
     this.buildRegisterForm();
   }
@@ -79,6 +84,10 @@ export class LoginComponent implements OnInit {
     }
   } 
 
+  public loginWithGoogle() {
+    this.apiService.googleLogin();
+  }
+
   submitLoginForm() {
     this.loginFormSubmitted = true;
 
@@ -92,7 +101,6 @@ export class LoginComponent implements OnInit {
     this.apiService.login(loginInfo).subscribe(
       (response: AccessToken) => {
           this.loginService.saveLoggedInUser(response.access_token, loginInfo.email);
-          environment.hideLandingPage = true;
           this.router.navigate(['']);
       },
       _ => {

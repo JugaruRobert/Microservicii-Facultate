@@ -7,7 +7,8 @@ import { LoggedInUser } from '../models/shared.models';
 })
 export class LoginService {
   loggedInUser: LoggedInUser = null;
-
+  googleError: Boolean = false;
+  
   constructor() { }
 
   getLoggedInUser() {
@@ -18,6 +19,8 @@ export class LoginService {
   }
 
   saveLoggedInUser(token: string, email: string) {
+    this.removeLoggedInUser();
+
     localStorage.setItem('loggedInUserToken', token);
     localStorage.setItem('loggedInUserEmail', email);
 
@@ -33,7 +36,6 @@ export class LoginService {
     localStorage.removeItem("loggedInUserToken");
     localStorage.removeItem("loggedInUserEmail");
     this.loggedInUser = undefined;
-    environment.hideLandingPage = false;
   }
 
   private getUserFromStorage() {

@@ -1,1 +1,21 @@
-
+<div class="hero-banner"></div>
+<user-panel></user-panel>
+<div *ngIf="books && books.length" class="library">
+    <div class="title-container">
+        <div class="addBookContainer" (click)="redirectToAddBook()">
+            <img src="../../../assets/addBook.png" class="addBookImage">
+            <span class="addBookText">Add Book</span>
+        </div>
+        <div class="libraryTitle">{{ 'Your_Library' | transformText }}</div>
+    </div>
+    <div id="booksContainer">
+        <div *ngFor="let book of books; index as idx" class="bookImageContainer" id="{{book.id}}" (click)="redirectToBookDetails(book.id)">
+            <img class="bookImage" src="{{book.coverImage}}" />
+            <div class="bookImageOverlay">
+                <span class="overlayBookTitle">{{book.title}}</span>
+                <span class="overlayBookAuthor">{{book.author}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<youbrary-footer></youbrary-footer>

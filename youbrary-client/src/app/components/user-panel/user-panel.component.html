@@ -1,0 +1,8 @@
+<div *ngIf="loggedInUser" class="userLoggedContainer" [class.hasLibraryBtn]="showLibraryBtn">
+    <div class="userIcon" [innerHtml]="'User_Icon' | transformIcon"></div>
+    <div class="userLoggedOverlay">
+        <div class="userLoggedEmail">{{loggedInUser.email}}</div>
+        <div *ngIf="showLibraryBtn" class="overlayButton libraryButton" (click)="goToLibrary()">{{'Library' | transformText}}</div>
+        <div class="overlayButton" (click)="signOut()">{{'SignOut' | transformText}}</div>
+    </div>
+</div>

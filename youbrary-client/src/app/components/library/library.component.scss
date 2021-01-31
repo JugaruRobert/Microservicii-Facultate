@@ -1,0 +1,125 @@
+.hero-banner {
+    background-color: #FFE600;
+    background-image: url('../../../assets/footer-banner.png');
+    width: 103%;
+    height: 14vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    transform: rotate(180deg) translateX(3px);
+}
+
+.library {
+    background-color: #FFE600;
+    height: 100%;
+    width: 100%;
+    padding-top: 50px;
+    position: relative;
+
+    .title-container {
+        position: relative;
+
+        .addBookContainer {
+            position: absolute;
+            left: 3vw;
+            top: 57px;
+            width: 20px;
+            display: flex;
+            cursor: pointer;
+
+            .addBookImage {
+                width: 62px;
+                height: 62px;
+                margin-top: 1px;
+            }
+
+            .addBookText {
+                font-size: 32px;
+                font-weight: 700;
+                margin-left: 6px;
+                line-height: 1.1;
+            }
+        }
+
+        .libraryTitle {
+            display: flex;
+            justify-content: center;
+            padding-top: 40px;
+            padding-bottom: 80px;
+            font-size: 72px;
+            font-weight: bolder;
+        }
+    }
+
+    #booksContainer {
+        width: 100vw;
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 72px;
+
+        .bookImageContainer {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+
+            &:hover {
+                .bookImageOverlay{
+                    height: 100%;
+                }
+            }
+
+            .bookImage {
+                width: calc(100vw/3);
+                height: auto;
+            }
+
+            .bookImageOverlay {
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                height: 0;
+                transition: ease-out 0.5s;
+                background-color: black;
+                opacity: 0.7;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                text-align: center;
+
+                .overlayBookTitle {
+                    color: white;
+                    font-size: 2.2vw;
+                    font-style: italic;
+                }
+
+                .overlayBookAuthor {
+                    color: white;
+                    font-size: 1.2vw;
+                    font-style: italic;
+                }
+            }
+        }
+    }
+
+    .paginationContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        padding-bottom: 72px;
+
+        #page-left-arrow, #page-right-arrow {
+            width: 60px;
+            cursor: pointer;
+            margin: 0 26px;
+        }
+        
+        #page-right-arrow {
+            transform: rotate(180deg);
+        }
+    }
+}

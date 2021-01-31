@@ -17,3 +17,15 @@ export interface ErrorResponse {
     status: number;
     message: string;
 }
+
+export interface Book {
+    id: string;
+    userEmail: string;
+    title: string;
+    author: string;
+    description: string;
+    isbn: string;
+    publisher: string;
+    numberOfPages: number;
+    coverImage: string;
+}

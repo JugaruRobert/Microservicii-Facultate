@@ -1,0 +1,29 @@
+mat-dialog-container {
+    background-color: #FFE600 !important;
+}
+
+.mat-dialog-title {
+    font-weight: 700 !important;
+    font-size: 32px !important;
+}
+
+.yesBtn {
+    cursor: pointer;
+    padding: 8px 12px;
+    background-color: #FFE600;
+    border: 3px solid black;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-right: 12px;
+    margin-bottom: 12px;
+}
+
+.cancelBtn {
+    cursor: pointer;
+    padding: 10px 18px;
+    background-color: black;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #FFE600;
+    margin-bottom: 12px;
+}

@@ -3,28 +3,31 @@
         <div class="container">
             <div class="card"></div>
             <div class="card">
-            <h1 class="title">Login</h1>
-            <form [formGroup]="loginForm">
-                <div class="input-container">
-                    <input type="text" id="loginEmail" formControlName="email" required/>
-                    <label for="loginEmail">Email</label>
-                    <div class="bar"></div>
-                    <div class="loginValidation" *ngIf="loginFormSubmitted && loginControls.email.errors">
-                        {{(loginControls.email.errors.required ? "Email_Required" : "Email_Invalid") | transformText}}
+                <h1 class="title">Login</h1>
+                <form [formGroup]="loginForm">
+                    <div class="input-container">
+                        <input type="text" id="loginEmail" formControlName="email" required/>
+                        <label for="loginEmail">Email</label>
+                        <div class="bar"></div>
+                        <div class="loginValidation" *ngIf="loginFormSubmitted && loginControls.email.errors">
+                            {{(loginControls.email.errors.required ? "Email_Required" : "Email_Invalid") | transformText}}
+                        </div>
                     </div>
-                </div>
-                <div class="input-container" >
-                    <input type="password" id="loginPassword" formControlName="password" required/>
-                    <label for="loginPassword">Password</label>
-                    <div class="bar"></div>
-                    <div class="loginValidation" *ngIf="loginFormSubmitted && loginControls.password.errors">
-                        {{(loginControls.password.errors.required ? "Password_Required" : "Password_MinLength") | transformText}}
+                    <div class="input-container" >
+                        <input type="password" id="loginPassword" formControlName="password" required/>
+                        <label for="loginPassword">Password</label>
+                        <div class="bar"></div>
+                        <div class="loginValidation" *ngIf="loginFormSubmitted && loginControls.password.errors">
+                            {{(loginControls.password.errors.required ? "Password_Required" : "Password_MinLength") | transformText}}
+                        </div>
                     </div>
+                    <div class="button-container">
+                        <button type="submit" (click)="submitLoginForm()"><span>Go</span></button>
+                    </div>
+                </form>
+                <div class="google-login-section"> 
+                    <img class="google-button" (click)="loginWithGoogle()" src="../../../assets/google-button.png"/>
                 </div>
-                <div class="button-container">
-                <button type="submit" (click)="submitLoginForm()"><span>Go</span></button>
-            </div>
-            </form>
             </div>
             <div class="card alt">
             <div class="toggle" (click)="toggleRegisterPage(true)">

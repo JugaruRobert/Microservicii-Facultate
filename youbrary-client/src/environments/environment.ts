@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  baseURL: "http://localhost:3000/",
-  hideLandingPage: false
+  baseURL: "http://localhost:3000/"
 };
 
 /*

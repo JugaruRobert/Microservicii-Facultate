@@ -48,6 +48,17 @@ $level: 1;
     }
 }
 
+.google-login-section {
+  padding-top: 32px;
+  border-top: 3px solid #FFE600;
+  margin: 32px 32px 0 32px;
+
+  .google-button {
+    width: 260px;
+    cursor: pointer;
+  }
+}
+
 .animated-gradient {
     height: 100vh;
     width: 100vw;
@@ -105,6 +116,7 @@ $level: 1;
         border-radius: 5px;
         padding: 60px 0 40px;
         overflow: hidden;
+        padding-top: 75px;
 
         .toggle {
           position: absolute;
@@ -257,7 +269,6 @@ $level: 1;
   }
 
   .button-container {
-    padding-top: 16px;
     margin: 0 60px;
     text-align: center;
 

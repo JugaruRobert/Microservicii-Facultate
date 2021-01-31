@@ -1,0 +1,62 @@
+<div class="detail-page-container" *ngIf="bookForm" [formGroup]="bookForm">
+    <div class="hero-banner"></div>
+    <user-panel [showLibraryBtn]="true"></user-panel>
+    <div *ngIf="selectedBook || isEdit" class="book-details-container">
+        <div class="actions-container">
+            <img *ngIf="!isEdit" (click)="editBook()" class="actionIcon editBtn" src="../../../assets/edit.png" />
+            <img *ngIf="isEdit" (click)="saveBook()" class="actionIcon saveBtn" src="../../../assets/save.png"/>
+            <img *ngIf="showDeleteBtn" (click)="deleteBook()" class="actionIcon deleteBtn" src="../../../assets/delete.png" />
+        </div>
+        <div class="book-image-container">
+            <img *ngIf="selectedBook?.coverImage" [src]="selectedBook.coverImage | safeHtml" class="book-image" />
+            <span *ngIf="selectedBook?.coverImage && isEdit" class="removeBookImageBtn" (click)="removeBookImage()">x</span>
+        </div>
+        <div *ngIf="!selectedBook?.coverImage" class="image-upload-wrap">
+            <input (change)="uploadImage($event)" class="file-upload-input" id="inputImageId" type="file" accept="image/png, image/jpeg, image/jpg"/>
+            <div class="drag-text">
+              <h3>{{'Upload_Image' | transformText}}</h3>
+            </div>
+        </div>
+        <div class="book-details" [class.editPadding]="isEdit">
+            <ng-container *ngIf="!isEdit">
+                <span class="title">{{selectedBook.title}}</span>
+                <span class="author">{{selectedBook.author}}</span>
+                <div class="book-information">
+                    <span class="book-detail">Publisher: {{selectedBook.publisher}}</span>
+                    <span class="book-detail">Pages: {{selectedBook.numberOfPages}}</span>
+                    <span class="book-detail">ISBN: {{selectedBook.isbn}}</span>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="isEdit">
+                <div class="book-information">
+                    <div class="input-container">
+                        <label class="editLabel" for="title">Title</label>
+                        <input class="editInput" type="text" id="title" formControlName="title" />
+                    </div>
+                    <div class="input-container authorContainer">
+                        <label class="editLabel" for="author">Author</label>
+                        <input class="editInput" type="text" id="author" formControlName="author" />
+                    </div>
+                    <div class="input-container">
+                        <label class="editLabel" for="publisher">Publisher</label>
+                        <input class="editInput" type="text" id="publisher" formControlName="publisher" />
+                    </div>
+                    <div class="input-container">
+                        <label class="editLabel" for="numberOfPages">Number of pages</label>
+                        <input class="editInput" type="text" id="numberOfPages" formControlName="numberOfPages" />
+                    </div>
+                    <div class="input-container paddingISBN">
+                        <label class="editLabel" for="isbn">ISBN</label>
+                        <input class="editInput" type="text" id="isbn" formControlName="isbn" />
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div *ngIf="selectedBook && !isEdit" class="bookDescription">{{selectedBook.description}}</div>
+    <div *ngIf="isEdit" class="bookDescription editDescription">
+        <label for="description">Description</label>
+        <textarea class="descriptionInput" type="text" id="description" formControlName="description"></textarea>
+    </div>
+</div>
+<youbrary-footer></youbrary-footer> 
