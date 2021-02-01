@@ -19,11 +19,11 @@ export class ApiService {
   }
 
   login(loginInfo: LoginInfo): Observable<AccessToken> {
-    return this.http.post<AccessToken>(this.baseUrl + "login", loginInfo);
+    return this.http.post<AccessToken>(this.baseUrl + "auth/login", loginInfo);
   }
 
   register(loginInfo: LoginInfo): Observable<ErrorResponse> {
-    return this.http.post<ErrorResponse>(this.baseUrl + "register", loginInfo);
+    return this.http.post<ErrorResponse>(this.baseUrl + "auth/register", loginInfo);
   }
 
   getAllBooks(userEmail: string): Observable<Book[]> {
@@ -39,7 +39,7 @@ export class ApiService {
   }
 
   googleLogin() {
-    location.href = this.baseUrl + 'google';
+    location.href = this.baseUrl + 'auth/google';
   }
 
   getBookDetails(bookID: string): Observable<Book> {
