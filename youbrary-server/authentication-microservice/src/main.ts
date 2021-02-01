@@ -8,17 +8,17 @@ import { auth_host } from './config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.connectMicroservice({
-    transport: Transport.TCP,
-    options: {
-      retryAttempts: 5,
-      retryDelay: 3000,
-      host: auth_host,
-      port: 3002
-    }
-  });
+  // app.connectMicroservice({
+  //   transport: Transport.TCP,
+  //   options: {
+  //     retryAttempts: 5,
+  //     retryDelay: 3000,
+  //     host: auth_host,
+  //     port: 3002
+  //   }
+  // });
 
-  await app.startAllMicroservicesAsync();
+  //await app.startAllMicroservicesAsync();
 
   app.enableCors();
   const options = new DocumentBuilder()

@@ -38,7 +38,7 @@ export class UserController {
     async saveUser(user: UserDto): Promise<User> {
         this.logger.log("saveUser method called - user: " + user.email);
 
-        const savedUser = this.userService.saveUser(user);
+        const savedUser = await this.userService.saveUser(user);
 
         this.logger.log("User Saved");
 

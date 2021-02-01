@@ -11,7 +11,7 @@ export class BookService {
   constructor(@InjectModel('Book') private readonly model: Model<Book>) {}
 
   async getAllBooksByUserEmail(email: string): Promise<Book[]> {
-    return await this.model.find(book => book.userEmail === email);
+    return await this.model.find({userEmail: email});
   }
 
   async getBookByID(bookID: string): Promise<Book> {

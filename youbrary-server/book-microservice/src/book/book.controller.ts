@@ -31,7 +31,7 @@ export class BookController {
     async getByID(@Param('bookID') bookID: string): Promise<Book> {
         this.logger.log("getByID method called - bookID: " + bookID);
 
-        const book = this.bookService.getBookByID(bookID);
+        const book = await this.bookService.getBookByID(bookID);
 
         if (!book) { 
             this.logger.log("Book not found!");
@@ -63,7 +63,7 @@ export class BookController {
     async update(@Body() book: Book): Promise<Book> {
         this.logger.log("update method called - book: " + book);
 
-        const databaseBook = this.bookService.getBookByID(book.id);
+        const databaseBook = await this.bookService.getBookByID(book.id);
 
         if (!databaseBook) {
             this.logger.log("Book not found!");
@@ -82,7 +82,7 @@ export class BookController {
     async deleteBook(@Param('bookID') bookID: string): Promise<void> {
         this.logger.log("deleteBook method called - bookID: " + bookID);
 
-        const book = this.bookService.getBookByID(bookID);
+        const book = await this.bookService.getBookByID(bookID);
 
         if (!book) {
             this.logger.log("Book not found!");
