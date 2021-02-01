@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Logger, Post, Req, Request, Res, UseGuards } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
 import { Provider } from './constants';
@@ -25,7 +25,12 @@ export class AuthController {
   }
 
   @Post('register')
+  @ApiBody({type: [UserDto]})
   async register(@Body() userDto: UserDto) {
+    console.log("********************************")
+    console.log(userDto);
+    console.log("********************************")
+
     this.logger.log("register method called");
 
     return this.authService.register(userDto)

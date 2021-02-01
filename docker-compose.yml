@@ -3,7 +3,7 @@ services:
   web:
     build: ./youbrary-client
     ports:
-      - 4200:4200
+      - 8085:4200
   auth:
     build: ./youbrary-server/authentication-microservice
     ports:

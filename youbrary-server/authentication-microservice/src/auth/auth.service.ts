@@ -39,11 +39,18 @@ export class AuthService {
   }
 
   async register(userDto: UserDto) {
+    console.log(userDto);
+
     this.userClient.send('getUserByEmail', userDto.email).subscribe(async (existingUser) => {
+      console.log("aaaaaaaaaaaaaaaaaaaaa")
+      console.log(existingUser)
       if(existingUser)
         throw new HttpException('A user with this email already exists', HttpStatus.INTERNAL_SERVER_ERROR);
 
-      this.userClient.send('saveUser', userDto).subscribe();
+      this.userClient.send('saveUser', userDto).subscribe(async (savedUser) => {
+        console.log("saved!!!")
+        console.log(savedUser.email)
+      });
     });
   }
 

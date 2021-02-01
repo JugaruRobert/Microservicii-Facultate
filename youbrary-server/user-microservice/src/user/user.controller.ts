@@ -2,6 +2,7 @@ import { Controller, Logger } from '@nestjs/common';
 import { MessagePattern, EventPattern, ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { auth_host } from 'src/config';
 import { User } from './user';
+import { UserDto } from './user.dto';
 
 import { UserService } from './user.service';
   
@@ -34,8 +35,8 @@ export class UserController {
     }
     
     @MessagePattern('saveUser')
-    async saveUser(user: User): Promise<User> {
-        this.logger.log("getUserByEmail method called - user: " + user);
+    async saveUser(user: UserDto): Promise<User> {
+        this.logger.log("saveUser method called - user: " + user.email);
 
         const savedUser = this.userService.saveUser(user);
 

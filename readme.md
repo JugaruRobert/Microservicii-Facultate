@@ -1,29 +1,10 @@
-# Order Management System
+# Youbrary
 
-Sample projects to demonstrate microservices, restful web api as well as ui.
-The system consists of 3 following projects:
-- Order Microservices
-- Payment Microservices
-- Order Web
-
-## Order Microservices
-
-It is responsible for orders management. When an order is created, it triggers the payment microservice to proceed the payment. It also has the endpoints to list, cancel and check the order status.
-
-The project developed in NestJS, backed by Mongodb, handles both TCP and HTTP requests (mixed mode) and used web sockets to update clients on the status of orders.
-
-### Technologies
-
-- Event-based and Message-based microservices on TCP:8876
-- REST api on port HTTP:8877
-- Swagger (http://localhost:8877/doc)
-- WebSocket
-- Mongodb
-- Docker
-
-## Payment Microservices
-
-This service is responsible for handling requests made by orders app to verify payment transaction and confirm or decline it. When the service proceed the payment, it emits an event and let the order app to know the result of payment, so, the order service will update the status of that specific order.
+The system consists of 4 projects:
+- authentication-microservice
+- book-microservice
+- user-microservice
+- youbrary-client
 
 ### Technologies
 
@@ -39,18 +20,15 @@ A user can see the list of orders, check their statuses in real-time (websocket)
 ### Technologies
 
 - Angular
-- socket-io
-- rxjs
-- docker
+- Socket-io
+- Rxjs
+- Docker
 
 ## Running the app
 
 Install Docker Desktop if you do not have it. Run docker package using docker-compose command
 
-```bash
-# docker
-$ docker-compose up #--build 
-```
+$ docker-compose up 
 
 Then browse http://localhost:8085/orders
 
