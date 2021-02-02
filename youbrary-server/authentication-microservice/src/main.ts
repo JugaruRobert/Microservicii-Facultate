@@ -2,25 +2,30 @@ import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+import * as bodyParser from 'body-parser';
+
 import { AppModule } from './app.module';
 import { auth_host } from './config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // app.connectMicroservice({
-  //   transport: Transport.TCP,
-  //   options: {
-  //     retryAttempts: 5,
-  //     retryDelay: 3000,
-  //     host: auth_host,
-  //     port: 3002
-  //   }
-  // });
+  app.connectMicroservice({
+    transport: Transport.TCP,
+    options: {
+      retryAttempts: 5,
+      retryDelay: 3000,
+      host: auth_host,
+      port: 3002
+    }
+  });
 
-  //await app.startAllMicroservicesAsync();
+  await app.startAllMicroservicesAsync();
 
   app.enableCors();
+  app.use(bodyParser.json({limit: '100mb'}));
+  app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
+
   const options = new DocumentBuilder()
     .setTitle('Authentication Service')
     .setDescription('Authenticate Users - Local, JWT, Google')

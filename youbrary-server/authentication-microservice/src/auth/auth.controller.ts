@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Logger, Post, Req, Request, Res, UseGuards } from '@nestjs/common';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiRequestTimeoutResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthService } from './auth.service';
 import { Provider } from './constants';
-import { UserDto } from './dto/user.dto';
+import { User } from './dto/user.dto';
 import { GoogleGuard } from './guards/google.guard';
 import { LocalGuard } from './guards/local.guard';
 
@@ -16,35 +16,36 @@ export class AuthController {
 
   @UseGuards(LocalGuard)
   @Post('login')
+  @ApiOperation({ summary: 'User login' })
+  @ApiBody({type: [User]})
+  @ApiResponse({ status: 200, description: 'JWT Authentication Token', type: String })
   async login(@Request() req) {
     this.logger.log("login method called");
 
-    return this.authService.createToken(req.user.email, Provider.LOCAL)
-           .catch((exception) => { 
-             return exception });
+    return await this.authService.createToken(req.user.email, Provider.LOCAL)
+           .catch((exception) => { return exception });
   }
 
   @Post('register')
-  @ApiBody({type: [UserDto]})
-  async register(@Body() userDto: UserDto) {
-    console.log("********************************")
-    console.log(userDto);
-    console.log("********************************")
-
+  @ApiOperation({ summary: 'Register a user' })
+  @ApiBody({type: [User]})
+  async register(@Body() userDto: User) {
     this.logger.log("register method called");
 
-    return this.authService.register(userDto)
-           .catch((exception) => { return exception });
+    return await this.authService.register(userDto)
+                 .catch((exception) => { return exception });
   }
 
   @Get('google')
   @UseGuards(GoogleGuard)
+  @ApiOperation({ summary: 'Start Google authentication flow' })
   googleLogin(){
     this.logger.log("google login method called");
   }
 
   @Get('google/callback')
   @UseGuards(GoogleGuard)
+  @ApiOperation({ summary: 'Google redirect callback' })
   googleLoginCallback(@Req() req, @Res() res)
   {
     this.logger.log("google login callback method called");

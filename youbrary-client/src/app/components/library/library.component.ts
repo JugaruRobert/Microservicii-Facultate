@@ -44,10 +44,11 @@ export class LibraryComponent implements OnInit {
   }
 
   private addMockBooks() {
-    this.books = Books;
-    this.books.forEach((book) => {
+    Books.forEach((book) => {
       book.userEmail = this.userEmail;
-      this.apiService.addBook(book).subscribe((_) => console.log("bookAdded"));
+      this.apiService.addBook(book).subscribe((book) => {
+        this.books.push(book);
+      });
     });
   }
 }

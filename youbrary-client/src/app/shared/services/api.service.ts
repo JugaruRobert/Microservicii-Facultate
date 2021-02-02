@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { AccessToken, Book, ErrorResponse, LoginInfo } from '../models/shared.models';
-import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,40 +12,37 @@ import { LoginService } from './login.service';
 export class ApiService {
   protected baseUrl: string;
 
-  constructor(private http: HttpClient,
-              private loginService: LoginService) {
-    this.baseUrl = environment.baseURL;
-  }
+  constructor(private http: HttpClient) {}
 
   login(loginInfo: LoginInfo): Observable<AccessToken> {
-    return this.http.post<AccessToken>(this.baseUrl + "auth/login", loginInfo);
+    return this.http.post<AccessToken>(environment.authURL + "login", loginInfo);
   }
 
   register(loginInfo: LoginInfo): Observable<ErrorResponse> {
-    return this.http.post<ErrorResponse>(this.baseUrl + "auth/register", loginInfo);
+    return this.http.post<ErrorResponse>(environment.authURL + "register", loginInfo);
   }
 
   getAllBooks(userEmail: string): Observable<Book[]> {
-    return this.http.get<Book[]>(this.baseUrl + 'books/' + userEmail);
+    return this.http.get<Book[]>(environment.bookURL + userEmail);
   }
 
   addBook(book: Book): Observable<Book> {
-    return this.http.post<Book>(this.baseUrl + 'books', book);
+    return this.http.post<Book>(environment.bookURL, book);
   }
 
   updateBook(book: Book): Observable<Book> {
-    return this.http.put<Book>(this.baseUrl + 'books', book);
+    return this.http.put<Book>(environment.bookURL, book);
   }
 
   googleLogin() {
-    location.href = this.baseUrl + 'auth/google';
+    location.href = environment.authURL + 'google';
   }
 
   getBookDetails(bookID: string): Observable<Book> {
-    return this.http.get<Book>(this.baseUrl + 'books/bookID/' + bookID);
+    return this.http.get<Book>(environment.bookURL + 'bookID/' + bookID);
   }
 
   deleteBook(bookID: string) {
-    return this.http.delete(this.baseUrl + 'books/' + bookID);
+    return this.http.delete(environment.bookURL + bookID);
   }
 }

@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: "", component: HeroComponent, canActivate: [HeroGuard] },
   { path: "login/google/failure", component: LoginComponent, canActivate: [LoginGuard] },
   { path: "login/google/success", component: LoginComponent, canActivate: [LoginGuard] },
-  { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
+  { path: "login", component: LoginComponent },
   { path: "library", component: LibraryComponent, canActivate: [AuthGuard] },
   { path: "details/:bookID", component: BookDetailsComponent },
   { path: "**", redirectTo: '' }

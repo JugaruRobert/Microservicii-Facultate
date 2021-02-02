@@ -2,6 +2,7 @@ import * as mongoose from 'mongoose';
 
 export const BookSchema = new mongoose.Schema({
     id: String,
+    userEmail: String,
     title: String,
     author: String,
     description: String,

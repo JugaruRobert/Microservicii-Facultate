@@ -80,7 +80,6 @@ export class BookDetailsComponent implements OnInit {
   saveBook() {
     this.updateBookDetails();
 
-    console.log(this.selectedBook);
     if(this.shouldAdd) {  
       this.apiService.addBook(this.selectedBook).subscribe((book) => {
         location.href = "/details/" + book.id;

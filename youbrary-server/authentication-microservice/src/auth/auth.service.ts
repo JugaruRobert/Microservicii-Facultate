@@ -4,7 +4,7 @@ import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { user_host } from 'src/config';
 
 import { Provider } from './constants';
-import { UserDto } from './dto/user.dto';
+import { User } from './dto/user.dto';
 
 @Injectable()
 export class AuthService {
@@ -38,26 +38,20 @@ export class AuthService {
     };
   }
 
-  async register(userDto: UserDto) {
-    console.log(userDto);
-
+  async register(userDto: User) {
     this.userClient.send('getUserByEmail', userDto.email).subscribe(async (existingUser) => {
-      console.log("aaaaaaaaaaaaaaaaaaaaa")
-      console.log(existingUser)
+
       if(existingUser)
         throw new HttpException('A user with this email already exists', HttpStatus.INTERNAL_SERVER_ERROR);
 
-      this.userClient.send('saveUser', userDto).subscribe(async (savedUser) => {
-        console.log("saved!!!")
-        console.log(savedUser.email)
-      });
+      this.userClient.send('saveUser', userDto).subscribe();
     });
   }
 
   async addGoogleUser(userEmail: string) {
     this.userClient.send('getUserByEmail', userEmail).subscribe(async (existingUser) => {
       if(!existingUser) {
-        let user = new UserDto();
+        let user = new User();
         user.email = userEmail;
 
         this.userClient.send('saveUser', user).subscribe();

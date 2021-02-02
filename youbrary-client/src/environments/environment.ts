@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseURL: "http://localhost:3000/"
+  authURL: "http://localhost:3001/auth/",
+  bookURL: "http://localhost:3003/books/"
 };
 
 /*

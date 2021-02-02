@@ -2,6 +2,9 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
+import * as bodyParser from 'body-parser';
+
 import { AppModule } from './app.module';
 import { book_host } from './config';
 
@@ -23,9 +26,12 @@ async function bootstrap() {
   await app.startAllMicroservicesAsync();
 
   app.enableCors();
+  app.use(bodyParser.json({limit: '100mb'}));
+  app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
+
   const options = new DocumentBuilder()
     .setTitle('Book Service')
-    .setDescription('CRUD operations on Books')
+    .setDescription('Service performing CRUD operations on books')
     .setVersion('1.0')
     .addTag('book service')
     .build();
