@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, GoneException, Logger, NotFoundException, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, GoneException, Logger, NotFoundException, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { EventPattern, MessagePattern } from "@nestjs/microservices";
 import { ApiOperation, ApiResponse, ApiTags, ApiParam, ApiBody } from "@nestjs/swagger";
 
@@ -6,15 +6,16 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Book } from "./book";
 import { BookService } from "./book.service";
+import { JwtGuard } from "./guards/jwt.guard";
 
 @Controller('books')
 @ApiTags('books')
+@UseGuards(JwtGuard)
 export class BookController {
     private readonly logger = new Logger("Book Controller");
 
     constructor(private readonly bookService: BookService) {}
 
-    @MessagePattern('getAllBooksByEmail')
     @Get(':email')
     @ApiOperation({ summary: 'Get all books by user email' })
     @ApiParam({ name: 'email', required: true, description: 'User Email' })
@@ -29,7 +30,6 @@ export class BookController {
         return books;
     }
 
-    @MessagePattern('getBookByID')
     @Get('/bookID/:bookID')
     @ApiOperation({ summary: 'Get a book by ID' })
     @ApiParam({ name: 'bookID', required: true, description: 'The id of the book' })
@@ -47,7 +47,6 @@ export class BookController {
         return book;
     }
 
-    @MessagePattern('addBook')
     @Post()
     @ApiOperation({ summary: 'Add a new book' })
     @ApiBody({type: [Book]})
@@ -65,7 +64,6 @@ export class BookController {
         return savedBook;
     }
 
-    @MessagePattern('updateBook')
     @Put()
     @ApiOperation({ summary: 'Update a book' })
     @ApiBody({type: [Book]})
@@ -95,7 +93,6 @@ export class BookController {
         await this.bookService.clearCollection();
     }
 
-    @EventPattern('deleteBook')
     @Delete(':bookID')
     @ApiOperation({ summary: 'Delete a book by id' })
     @ApiParam({ name: 'bookID', required: true, description: 'The id of the book' })

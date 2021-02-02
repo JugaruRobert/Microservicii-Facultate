@@ -1,6 +1,14 @@
 ﻿# compiled output
 /dist
 /node_modules
+/youbrary-server/authentication-microservice/dist
+/youbrary-server/authentication-microservice/node_modules
+/youbrary-server/book-microservice/dist
+/youbrary-server/book-microservice/node_modules
+/youbrary-server/user-microservice/dist
+/youbrary-server/user-microservice/node_modules
+/youbrary-client/dist
+/youbrary-client/node_modules
 
 # Logs
 logs
