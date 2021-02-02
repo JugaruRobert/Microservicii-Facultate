@@ -1,28 +1,28 @@
 # Youbrary
 
-The system consists of 4 projects:
+Youbrary is a recommendation based library. The system consists of 4 projects:
 - authentication-microservice
 - book-microservice
-- user-microservice
+- user-microservice (internally used microservice)
 - youbrary-client
 
-### Technologies
+### Used Technologies
 
 - Nestjs microservices
+- Passport
 - Mongodb
 - Docker
 - Google API
 
-### Technologies
+Web client was build using Angular with Angular Material. An interceptor was used for JWT.
+The server was used using NestJS. Authentication was done using Passport (local, jwt and google). 
+Database is a MongoDB database. 
+The up runs in a docker container.
 
-- Angular
-- Rxjs
-- Docker
-
-## Running the app
+## Running the application
 
 Install Docker Desktop if you do not have it. Run docker package using docker-compose command
 
-$ docker-compose up 
+docker-compose up 
 
-Then browse http://localhost:4200
+Browse: http://localhost:4200/
